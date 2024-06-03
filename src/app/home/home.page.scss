@@ -27,3 +27,56 @@
   text-decoration: none;
 }
 
+
+
+ion-card{
+  background-color: transparent;
+}
+
+.logo {
+  max-width: 50%;
+  height: auto;
+}
+
+/* animacion por rotacion*/
+.animated-image-rotate{
+  justify-content: center;
+  align-items: center;
+
+  img {
+    width:150px;
+    height: 150px;
+    animation: rotate 4s linear infinite;
+  }
+}
+
+
+@keyframes rotate {
+  from {
+    trnsform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* animacion lineal*/
+.animated-image {
+  justify-content: center;
+  align-items: center;
+  img {
+    width: 100px;
+    animation: move 5s infinite alternate;
+  }
+}
+
+
+@keyframes move {
+  0% {
+    trnsform: translateX(0);
+  }
+  100% {
+    transform: translateX(100px);
+  }
+}

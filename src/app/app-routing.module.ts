@@ -18,6 +18,18 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
 
   },
+  {
+    path: 'sex',
+    loadChildren: () => import('./sex/sex.module').then( m => m.SexPageModule)
+  },
+  {
+    path: 'edad',
+    loadChildren: () => import('./edad/edad.module').then( m => m.EdadPageModule)
+  },
+  {
+    path: 'estatura',
+    loadChildren: () => import('./estatura/estatura.module').then( m => m.EstaturaPageModule)
+  },
 ];
 
 @NgModule({
