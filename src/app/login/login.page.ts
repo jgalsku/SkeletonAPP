@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { NavigationExtras, Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
+import { DbserviceService } from '../dbservice.service';
+
+
 
 @Component({
   selector: 'app-login',
@@ -9,43 +12,49 @@ import { NavigationExtras, Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  usuario: string="";
-  password: string="";
+  constructor(private alertController:AlertController,
+              private router:Router,
+              private dbService: DbserviceService) { }
 
-  constructor(private alertController:AlertController,private router:Router
-  ) { }
+  usuario: any="";
+  password: string=""; 
 
   ngOnInit() {
   }
 
+  async presentAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Mensaje',
+      message: message,
+      buttons: ['OK']
+    });
 
-  login(){
-      if (this.usuario.trim() == 'miguel' && this.password.trim() == '1234') {
-        let nagivationExtras: NavigationExtras = {
-          state:{
-            usuarioEnviado: this.usuario,
-            passwordEnviado: this.password
-          }
-        }
-        this.router.navigate(['/home'],nagivationExtras);
-      }
-      else{
-        this.presentAlert('Incorrecto');
-      }
-
-      }
-
-
-      async presentAlert(message: string) {
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: message,
-          buttons: ['OK']
-        });
-
-
-        await alert.present();
+    await alert.present();
   }
 
+
+  async login() {
+    const usuario = await this.dbService.validarUsuario(this.usuario, this.password);
+    if (usuario) {
+      // Usuario válido, realizar acciones de inicio de sesión
+      let NavigationExtras: NavigationExtras = {
+        state:{
+          usuarioEnviado: this.usuario,
+          passwordEnviado: this.password
+        }
+
+      } 
+      this.router.navigate(['/home'],NavigationExtras);
+    } else {
+      // Usuario inválido, mostrar mensaje de error
+      this.presentAlert('Credenciales inválidas');
+    }
+  }
+   
+  
+  crear_cuenta()
+  {
+    this.router.navigate(['/registro']);
+  }
 
 }

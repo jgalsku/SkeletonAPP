@@ -12,11 +12,12 @@ export class HomePage {
 
   usuarioRecibido: string='';
   passwordRecibido: string='';
-  nombre: string='';
-  apellido: string='';
-  selectedOption: string='';
-  selectedDate: string='';
+  nombre: any='';
+  apellido: any='';
+  selectedOption: any='';
+  selectedDate: any='';
 
+  usuarioRecibidoPersistente: any='';
 
   constructor(private router:Router, private activateroute:ActivatedRoute, private alertController: AlertController) {
     this.activateroute.queryParams.subscribe(params =>{
@@ -25,12 +26,25 @@ export class HomePage {
         this.usuarioRecibido = this.router.getCurrentNavigation()?.extras?.state?.['usuarioEnviado'];
         this.passwordRecibido = this.router.getCurrentNavigation()?.extras?.state?.['passwordEnviado'];
 
+        localStorage.setItem('usuarioRecibidoPersistente', this.usuarioRecibido)
+
         console.log();
       }
     })
 
 
   }
+
+
+ngOnInit() {
+  this.nombre = localStorage.getItem("nombre");
+  this.apellido = localStorage.getItem("apellido");
+  this.selectedOption = localStorage.getItem("selectedOption");
+  this.selectedDate = localStorage.getItem("selectedDate");
+
+  this.usuarioRecibidoPersistente = localStorage.getItem("usuarioRecibidoPersistente");
+}
+
 
 
   async presentAlert(message: string) {
@@ -52,7 +66,16 @@ mostrar(){
   } else {
     //Lógica para manejar el envio del formulario cuando es válido
       this.presentAlert('Su nombre es:' +this.nombre+' '+this.apellido);
-  }
+  
+        localStorage.setItem('nombre', this.nombre);
+        localStorage.setItem('apellido', this.apellido);
+        localStorage.setItem('selectedOption', this.selectedOption);
+        localStorage.setItem('selectedDate', this.selectedDate);
+
+
+
+  
+    }
 
 }
 
@@ -62,6 +85,8 @@ this.apellido = '';
 this.nombre = '';
 this.selectedOption = '';
 this.selectedDate = '';
+
+localStorage.clear();
 }
 
 
