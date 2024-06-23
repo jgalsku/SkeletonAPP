@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { DbserviceService } from '../dbservice.service';
 
 
 @Component({
@@ -19,21 +20,10 @@ export class HomePage {
 
   usuarioRecibidoPersistente: any='';
 
-  constructor(private router:Router, private activateroute:ActivatedRoute, private alertController: AlertController) {
-    this.activateroute.queryParams.subscribe(params =>{
-      if(this.router.getCurrentNavigation()?.extras?.state){
-
-        this.usuarioRecibido = this.router.getCurrentNavigation()?.extras?.state?.['usuarioEnviado'];
-        this.passwordRecibido = this.router.getCurrentNavigation()?.extras?.state?.['passwordEnviado'];
-
-        localStorage.setItem('usuarioRecibidoPersistente', this.usuarioRecibido)
-
-        console.log();
-      }
-    })
-
-
-  }
+  constructor(private router:Router,
+    private activateroute:ActivatedRoute, 
+    private alertController:AlertController,
+    private dbService: DbserviceService) {}
 
 
 ngOnInit() {
@@ -59,10 +49,6 @@ ngOnInit() {
 
 }
 
-
-navegarAMiPagina() {
-  this.router.navigate(['/tabs']);
-}
 
 mostrar(){
   if (this.nombre.trim() === '' || this.apellido.trim() === ''){
@@ -93,6 +79,8 @@ this.selectedDate = '';
 localStorage.clear();
 }
 
-
+navegarAMiPagina() {
+  this.router.navigate(['/tabs']);
+}
 }
 
