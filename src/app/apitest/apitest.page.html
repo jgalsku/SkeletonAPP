@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Api Test
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Api Test</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" class="cuerpo_page">
+    <h1 style="text-align: center;">Indicadores Finacieros Hoy</h1>
+
+    <ion-list>
+      <ion-card *ngFor="let item of financialData">
+        <ion-card-header>
+          <ion-card-title>{{ item.nombre }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <p><strong>Código:</strong> {{ item.codigo }}</p>
+          <p><strong>Unidad de Medida:</strong> {{ item.unidad_medida }}</p>
+          <p><strong>Fecha:</strong> {{ item.fecha | date:'short' }}</p>
+          <p><strong>Valor:</strong> {{ item.valor | number:'1.2-2' }}</p>
+        </ion-card-content>
+      </ion-card>
+       
+    </ion-list>
+
+
+    <!--
+  <ion-card *ngIf="datosUnidad">
+    <ion-card-header>
+      <ion-card-title>{{ datosUnidad.nombre }}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div *ngFor="let item of datosUnidad.serie">
+            <p><strong>Fecha:</strong> {{ item.fecha | date:'medium' }}</p>
+            <p><strong>Valor:</strong> {{ item.valor }}</p>
+      </div> 
+    </ion-card-content>
+  </ion-card>
+  
+ -->
+    
+  </div>
+</ion-content>
+
+    <ion-button (click)="volver()">Volver</ion-button> 

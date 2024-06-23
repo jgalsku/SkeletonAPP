@@ -21,6 +21,7 @@ export class RegistroPage implements OnInit {
   isDBReady: boolean = false;
   
 
+
   constructor(private router:Router,
               private activateroute:ActivatedRoute, 
               private alertController:AlertController,

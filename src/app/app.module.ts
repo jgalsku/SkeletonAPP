@@ -10,10 +10,13 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 
 import { SQLite } from '@awesome-cordova-plugins/sqlite/ngx';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, SQLite, provideAnimationsAsync()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule],
+  providers: [{ provide: RouteReuseStrategy, 
+                useClass: IonicRouteStrategy }, SQLite, provideAnimationsAsync()],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

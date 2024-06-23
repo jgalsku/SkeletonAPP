@@ -9,8 +9,8 @@ const routes: Routes = [
     component: TabsPage,
     children:[
       {
-        path: 'registro',
-        loadChildren: () => import('../registro/registro.module').then( m => m.RegistroPageModule)
+        path: 'home',
+        loadChildren: () => import('../home/home.module').then( m => m.HomePageModule)
       },
       {
         path: 'sex',
@@ -21,8 +21,16 @@ const routes: Routes = [
         loadChildren: () => import('../edad/edad.module').then( m => m.EdadPageModule)
       },
       {
+        path: 'estatura',
+        loadChildren: () => import('../estatura/estatura.module').then( m => m.EstaturaPageModule)
+      },
+      {
+        path: 'apitest',
+        loadChildren: () => import('../apitest/apitest.module').then( m => m.ApitestPageModule)
+      },
+      {
         path: '',
-        redirectTo: 'registro',
+        redirectTo: 'home',
         pathMatch: 'full'
       }
     ]

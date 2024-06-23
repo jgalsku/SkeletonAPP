@@ -22,7 +22,6 @@
 
     <ion-card-title>
       <h3>Perfil de usuario</h3>
-      <p>Usuario: {{ usuarioRecibidoPersistente }}</p>
     </ion-card-title>
 
 
@@ -41,32 +40,22 @@
 
     <!-- Creamos los campos para el login-->
     <ion-card-content>
-      <ion-item>
-        <ion-label position="floating" >Nombre</ion-label>
-          <ion-input type="text" [(ngModel)]="nombre"></ion-input>
-      </ion-item>
 
     <ion-item>
-      <ion-label position="floating" >Apellido</ion-label>
-      <ion-input type="text" [(ngModel)]="apellido"></ion-input>
+      <ion-label>Usuario: {{ usuarioRecibidoPersistente }}</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label>Fecha Nacimiento</ion-label>
-      <ion-item>
-        <!-- Componente de Angular Material -->
-        <mat-form-field>
-          <mat-label>Fecha Nacimiento</mat-label>
-          <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDate">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-
-        <!--  <ion-input type="date" [(ngModel)]="selectedDate"></ion-input> -->
-        
-      </ion-item>
+      <ion-label>Nombre: {{nombre + apellido}}</ion-label>
     </ion-item>
 
+    <ion-item>
+      <ion-label>Educacion: {{selectedOption}}</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Fecha de nacimiento: {{selectedDate}}</ion-label>
+    </ion-item>
 
     <ion-item>
       <ion-label>Historial de casos</ion-label>
@@ -80,16 +69,14 @@
 
   </ion-card-content>
 
-    <!-- Creamos el boton-->
-    <ion-button (click) = "limpiar()">Limpiar</ion-button>
-    <ion-button (click) = "mostrar()">Mostrar</ion-button>
-  
-  </ion-card>
+  <!-- Creamos el boton-->
+  <!--<ion-button (click) = "limpiar()">Limpiar</ion-button>-->
+  <!--<ion-button (click) = "mostrar()">Mostrar datos cuenta</ion-button>-->
+  <ion-button (click) = "navegarAMiPagina()">Explorar caso</ion-button>
+
+</ion-card>
 
   </div>
 
-  <div id="container">
-    <!-- Boton para llamar a MiPagina-->
-     <ion-button expand="block" (click)="navegarAMiPagina()">Ir a MiPagina</ion-button>
-  </div> 
+
 </ion-content>

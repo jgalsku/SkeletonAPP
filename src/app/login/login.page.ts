@@ -47,7 +47,7 @@ export class LoginPage implements OnInit {
       this.router.navigate(['/home'],NavigationExtras);
     } else {
       // Usuario inválido, mostrar mensaje de error
-      this.presentAlert('Credenciales inválidas');
+      this.presentAlert('No existe el usuario en la base de datos');
     }
   }
    

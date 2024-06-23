@@ -1,0 +1,24 @@
+ion-menu {
+    --background: #f8f8f8;
+    
+    ion-header,
+    ion-toolbar {
+      --background: #4a90e2;
+    }
+  
+    ion-content {
+      ion-list {
+        ion-item {
+          color: darkblue; /* Color del texto */
+          
+          ion-icon {
+            color: darkblue; /* Color de los iconos */
+          }
+          
+          &:hover {
+            background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
+          }
+        }
+      }
+    }
+  }
