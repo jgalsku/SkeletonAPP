@@ -20,6 +20,8 @@ export class HomePage {
 
   usuarioRecibidoPersistente: any='';
 
+
+
   constructor(private router:Router,
     private activateroute:ActivatedRoute, 
     private alertController:AlertController,
