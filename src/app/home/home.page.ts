@@ -16,6 +16,7 @@ export class HomePage {
   apellido: any='';
   selectedOption: any='';
   selectedDate: any='';
+  casos: any='';
   
   usuario: any='';
 
@@ -85,6 +86,12 @@ localStorage.clear();
 
 navegarAMiPagina() {
   this.router.navigate(['/tabs']);
+}
+
+
+navegarARegistroCaso()
+{
+  this.router.navigate(['/registro-caso']);
 }
 }
 

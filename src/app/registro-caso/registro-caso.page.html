@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Registro Caso</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container" class="cuerpo_page">
+    <ion-card>
+
+      <ion-card-title>
+        <h3>Crear Caso</h3> 
+      </ion-card-title>
+ 
+
+      <!-- Creamos los campos para el home-->
+      <ion-card-content>
+
+      <ion-item>
+        <ion-label position="floating">ID</ion-label>
+        <ion-input type="text" [(ngModel)]="casoID"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Ubicación</ion-label>
+        <ion-input type="text" [(ngModel)]="casoUbica "></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Causa de muerte</ion-label>
+        <ion-select [(ngModel)]="casoCausa">
+          <ion-select-option value="1">Accidente</ion-select-option>
+          <ion-select-option value="2">Homicidio</ion-select-option>
+          <ion-select-option value="3">Suicidio</ion-select-option>
+          <ion-select-option value="3">Indeterminada</ion-select-option>
+
+        </ion-select>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label position="floating">Sexo conocido</ion-label>
+        <ion-input type="text" [(ngModel)]="casoSex"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Edad conocida</ion-label>
+        <ion-input type="text" [(ngModel)]="casoEdad"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Estatura conocida</ion-label>
+        <ion-input type="text" [(ngModel)]="casoEstat"></ion-input>
+      </ion-item>
+
+
+      </ion-card-content>
+
+        <!-- Creamos el boton -->
+        <ion-button (click)="guardar()" >Guardar Caso</ion-button>
+        <ion-button (click)="volver()">Volver a Home</ion-button> 
+    </ion-card>
+  </div>
+</ion-content>

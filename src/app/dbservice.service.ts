@@ -15,7 +15,7 @@ export class DbserviceService {
     private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false); 
 
   constructor(private sqlite: SQLite, private toastController: ToastController) { 
-    this.initDatabase(); 
+    this.initDatabase(), this.initDatabase2(); 
   }
 
   private initDatabase() {
@@ -31,6 +31,20 @@ export class DbserviceService {
   }
 
 
+  private initDatabase2() {
+    this.sqlite.create({
+      name: 'casosdb.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      this.db = db;
+      this.createTables2();
+      this.isDBReady.next(true); // Emitimos true cuando la base de datos esté lista
+      this.presentToast('Base de datos y tabla creadas con éxito');
+    }).catch(error => console.log(error));
+  }
+
+
+
   private createTables() {
     this.db.executeSql(
       `CREATE TABLE IF NOT EXISTS usuarios (
@@ -40,25 +54,34 @@ export class DbserviceService {
         nombre TEXT,
         apellido TEXT,
         nivel_estudios TEXT,
-        fecha_nacimiento TEXT
+        fecha_nacimiento TEXT,
+        casos TEXT
+      )`, [])
+      .then(() => this.presentToast('Table created'))
+      .catch(error => this.presentToast('Error creating table' + error));
+  }
+
+  private createTables2() {
+    this.db.executeSql(
+      `CREATE TABLE IF NOT EXISTS casos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        casoID TEXT,
+        casoUbica TEXT,
+        casoCausa TEXT,
+        casoSex TEXT,
+        casoEdad TEXT,
+        casoEstat TEXT
       )`, [])
       .then(() => this.presentToast('Table created'))
       .catch(error => this.presentToast('Error creating table' + error));
   }
 
 
+
   validarUsuario(usuario: string, password: string) {
     return this.db.executeSql('SELECT * FROM usuarios WHERE usuario = ? AND password = ?', [usuario, password])
       .then((res) => {
         if (res.rows.length > 0) {
-          const user = res.rows.item(0);
-          //alert('Usuario validado $[user.nombre]');
-          localStorage.setItem('nombre', user.nombre);
-          localStorage.setItem('apellido', user.apellido);
-          localStorage.setItem('usuario', user.usuario);
-          localStorage.setItem('selectedOption', user.selectedOption);
-          localStorage.setItem('selectedDate', user.selectedDate);
-
           return res.rows.item(0); // Retorna el primer usuario que coincide
         } else {
           return null; // Retorna null si no se encontró ningún usuario
@@ -69,7 +92,7 @@ export class DbserviceService {
 
 
 
-  insertUsuario(nombre: string, apellido: string, usuario: string, password: any, selectedOption: any, selectedDate: any) {
+  insertUsuario(nombre: any, apellido: any, usuario: any, password: any, selectedOption: any, selectedDate: any) {
     return this.db.executeSql(`
       INSERT INTO usuarios (nombre, apellido, usuario, password, nivel_de_estudios, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?);
     `, [nombre, apellido, usuario, password, selectedOption, selectedDate])
@@ -78,6 +101,16 @@ export class DbserviceService {
   }
 
  
+  insertCaso(casoID: any, casoUbica: any, casoCausa: any, casoSex: any, casoEdad: any, casoEstat: any) {
+    return this.db.executeSql(`
+      INSERT INTO usuarios (casoID, casoUbica, casoCausa, casoSex, casoEdad, casoEstat) VALUES (?, ?, ?, ?, ?, ?);
+    `, [casoID, casoUbica, casoCausa, casoSex, casoEdad, casoEstat])
+    .then(() => this.presentToast('Caso insertado correctamente'))
+    .catch(error => this.presentToast('Error al insertar caso:'+ error));
+  }
+
+ 
+
  
 
   private async presentToast(message: string) {

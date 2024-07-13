@@ -15,7 +15,7 @@ export class DbserviceService {
     private isDBReady: BehaviorSubject<boolean> = new BehaviorSubject(false); 
 
   constructor(private sqlite: SQLite, private toastController: ToastController) { 
-    this.initDatabase(); 
+    this.initDatabase(), this.initDatabase2(); 
   }
 
   private initDatabase() {
@@ -31,6 +31,20 @@ export class DbserviceService {
   }
 
 
+  private initDatabase2() {
+    this.sqlite.create({
+      name: 'casosdb.db',
+      location: 'default'
+    }).then((db: SQLiteObject) => {
+      this.db = db;
+      this.createTables2();
+      this.isDBReady.next(true); // Emitimos true cuando la base de datos esté lista
+      this.presentToast('Base de datos y tabla creadas con éxito');
+    }).catch(error => console.log(error));
+  }
+
+
+
   private createTables() {
     this.db.executeSql(
       `CREATE TABLE IF NOT EXISTS usuarios (
@@ -40,11 +54,28 @@ export class DbserviceService {
         nombre TEXT,
         apellido TEXT,
         nivel_estudios TEXT,
-        fecha_nacimiento TEXT
+        fecha_nacimiento TEXT,
+        casos TEXT
       )`, [])
       .then(() => this.presentToast('Table created'))
       .catch(error => this.presentToast('Error creating table' + error));
   }
+
+  private createTables2() {
+    this.db.executeSql(
+      `CREATE TABLE IF NOT EXISTS casos (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        casoID TEXT,
+        casoUbica TEXT,
+        casoCausa TEXT,
+        casoSex TEXT,
+        casoEdad TEXT,
+        casoEstat TEXT
+      )`, [])
+      .then(() => this.presentToast('Table created'))
+      .catch(error => this.presentToast('Error creating table' + error));
+  }
+
 
 
   validarUsuario(usuario: string, password: string) {
@@ -70,6 +101,16 @@ export class DbserviceService {
   }
 
  
+  insertCaso(casoID: any, casoUbica: any, casoCausa: any, casoSex: any, casoEdad: any, casoEstat: any) {
+    return this.db.executeSql(`
+      INSERT INTO usuarios (casoID, casoUbica, casoCausa, casoSex, casoEdad, casoEstat) VALUES (?, ?, ?, ?, ?, ?);
+    `, [casoID, casoUbica, casoCausa, casoSex, casoEdad, casoEstat])
+    .then(() => this.presentToast('Caso insertado correctamente'))
+    .catch(error => this.presentToast('Error al insertar caso:'+ error));
+  }
+
+ 
+
  
 
   private async presentToast(message: string) {

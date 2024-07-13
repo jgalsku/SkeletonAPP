@@ -59,8 +59,8 @@
     </ion-item>*/
 -->
     <ion-item>
-      <ion-label>Selección de caso</ion-label>
-      <ion-select [(ngModel)]="casosOptions">
+      <ion-label>Casos del usuario</ion-label>
+      <ion-select [(ngModel)]="casos">
       </ion-select>
     </ion-item>
 
@@ -70,6 +70,7 @@
   <!-- Creamos el boton-->
   <!--<ion-button (click) = "limpiar()">Limpiar</ion-button>-->
   <ion-button (click) = "mostrar()">Mostrar datos cuenta</ion-button>
+  <ion-button (click) = "navegarARegistroCaso()">Agregar caso</ion-button>
   <ion-button (click) = "navegarAMiPagina()">Explorar caso</ion-button>
 
 </ion-card>

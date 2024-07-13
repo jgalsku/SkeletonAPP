@@ -58,6 +58,10 @@ const routes: Routes = [
     path: 'camara',
     loadChildren: () => import('./camara/camara.module').then( m => m.CamaraPageModule)
   },
+  {
+    path: 'registro-caso',
+    loadChildren: () => import('./registro-caso/registro-caso.module').then( m => m.RegistroCasoPageModule)
+  },
 ];
 
 @NgModule({
