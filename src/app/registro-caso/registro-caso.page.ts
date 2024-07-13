@@ -13,6 +13,8 @@ export class RegistroCasoPage {
   usuarioRecibido: any='';
   passwordRecibido: any='';
 
+  casos: any='';
+
   casoID: any='';
   casoUbica: any='';
   casoCausa: any='';
@@ -67,11 +69,11 @@ export class RegistroCasoPage {
     if (this.casoID.trim() === '') {
       this.presentAlert('Error: ID vacío');
     } else {
-      this.guardarDatos();  
+      this.guardarDatosCaso();  
     }
   }
 
-  guardarDatos() {
+  guardarDatosCaso() {
     this.dbService.insertCaso(this.casoID, this.casoUbica, this.casoCausa , this.casoSex , this.casoEdad , this.casoEstat )
       .then(() => {
         this.presentAlert('Datos del caso guardados exitosamente');
