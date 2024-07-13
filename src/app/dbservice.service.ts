@@ -39,7 +39,7 @@ export class DbserviceService {
         password TEXT,
         nombre TEXT,
         apellido TEXT,
-        nivel_de_estudios TEXT,
+        nivel_estudios TEXT,
         fecha_nacimiento TEXT
       )`, [])
       .then(() => this.presentToast('Table created'))
@@ -51,6 +51,14 @@ export class DbserviceService {
     return this.db.executeSql('SELECT * FROM usuarios WHERE usuario = ? AND password = ?', [usuario, password])
       .then((res) => {
         if (res.rows.length > 0) {
+          const user = res.rows.item(0);
+          //alert('Usuario validado $[user.nombre]');
+          localStorage.setItem('nombre', user.nombre);
+          localStorage.setItem('apellido', user.apellido);
+          localStorage.setItem('usuario', user.usuario);
+          localStorage.setItem('selectedOption', user.selectedOption);
+          localStorage.setItem('selectedDate', user.selectedDate);
+
           return res.rows.item(0); // Retorna el primer usuario que coincide
         } else {
           return null; // Retorna null si no se encontró ningún usuario
@@ -61,7 +69,7 @@ export class DbserviceService {
 
 
 
-  insertUsuario(nombre: string, apellido: string, usuario: string, password: string, selectedOption: string, selectedDate: string) {
+  insertUsuario(nombre: string, apellido: string, usuario: string, password: any, selectedOption: any, selectedDate: any) {
     return this.db.executeSql(`
       INSERT INTO usuarios (nombre, apellido, usuario, password, nivel_de_estudios, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?);
     `, [nombre, apellido, usuario, password, selectedOption, selectedDate])

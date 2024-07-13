@@ -42,27 +42,25 @@
     <ion-card-content>
 
     <ion-item>
-      <ion-label>Usuario: {{ usuarioRecibidoPersistente }}</ion-label>
+      <ion-label>Usuario: {{ usuario }}</ion-label>
     </ion-item>
 
     <ion-item>
-      <ion-label>Nombre: {{nombre + apellido}}</ion-label>
+      <ion-label>Nombre: {{nombre + " " + apellido }}</ion-label>
     </ion-item>
 
+ <!--
     <ion-item>
       <ion-label>Educacion: {{selectedOption}}</ion-label>
     </ion-item>
 
     <ion-item>
       <ion-label>Fecha de nacimiento: {{selectedDate}}</ion-label>
-    </ion-item>
-
+    </ion-item>*/
+-->
     <ion-item>
-      <ion-label>Historial de casos</ion-label>
-      <ion-select [(ngModel)]="selectedOption">
-        <ion-select-option value="option1">Caso A</ion-select-option>
-        <ion-select-option value="option2">Caso B</ion-select-option>
-        <ion-select-option value="option3">Caso C</ion-select-option>
+      <ion-label>Selección de caso</ion-label>
+      <ion-select [(ngModel)]="casosOptions">
       </ion-select>
     </ion-item>
 
@@ -71,7 +69,7 @@
 
   <!-- Creamos el boton-->
   <!--<ion-button (click) = "limpiar()">Limpiar</ion-button>-->
-  <!--<ion-button (click) = "mostrar()">Mostrar datos cuenta</ion-button>-->
+  <ion-button (click) = "mostrar()">Mostrar datos cuenta</ion-button>
   <ion-button (click) = "navegarAMiPagina()">Explorar caso</ion-button>
 
 </ion-card>

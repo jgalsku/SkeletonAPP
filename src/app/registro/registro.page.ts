@@ -10,9 +10,9 @@ import { DbserviceService } from '../dbservice.service';
   styleUrls: ['registro.page.scss'] 
 })
 export class RegistroPage {
-
-  usuarioRecibido: string='';
-  passwordRecibido: string='';
+  
+  usuarioRecibido: any='';
+  passwordRecibido: any='';
 
   nombre: any='';
   apellido: any='';

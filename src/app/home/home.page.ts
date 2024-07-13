@@ -11,14 +11,17 @@ import { DbserviceService } from '../dbservice.service';
 })
 export class HomePage {
 
-  usuarioRecibido: string='';
-  passwordRecibido: string='';
+  passwordRecibido: any='';
   nombre: any='';
   apellido: any='';
   selectedOption: any='';
   selectedDate: any='';
+  
+  usuario: any='';
 
-  usuarioRecibidoPersistente: any='';
+  /*usuarioRecibido: any='';
+
+  usuarioRecibidoPersistente: any='';*/
 
 
 
@@ -33,8 +36,7 @@ ngOnInit() {
   this.apellido = localStorage.getItem("apellido");
   this.selectedOption = localStorage.getItem("selectedOption");
   this.selectedDate = localStorage.getItem("selectedDate");
-
-  this.usuarioRecibidoPersistente = localStorage.getItem("usuarioRecibidoPersistente");
+  this.usuario = localStorage.getItem("usuario");
 }
 
 

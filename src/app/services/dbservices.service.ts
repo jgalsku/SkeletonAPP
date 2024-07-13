@@ -39,7 +39,7 @@ export class DbserviceService {
         password TEXT,
         nombre TEXT,
         apellido TEXT,
-        nivel_de_estudios TEXT,
+        nivel_estudios TEXT,
         fecha_nacimiento TEXT
       )`, [])
       .then(() => this.presentToast('Table created'))
@@ -61,7 +61,7 @@ export class DbserviceService {
 
 
 
-  insertUsuario(nombre: string, apellido: string, usuario: string, password: string, selectedOption: string, selectedDate: string) {
+  insertUsuario(nombre: any, apellido: any, usuario: any, password: any, selectedOption: any, selectedDate: any) {
     return this.db.executeSql(`
       INSERT INTO usuarios (nombre, apellido, usuario, password, nivel_de_estudios, fecha_nacimiento) VALUES (?, ?, ?, ?, ?, ?);
     `, [nombre, apellido, usuario, password, selectedOption, selectedDate])

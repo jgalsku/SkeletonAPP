@@ -14,10 +14,11 @@ export class LoginPage implements OnInit {
 
   constructor(private alertController:AlertController,
               private router:Router,
-              private dbService: DbserviceService) { }
+              private dbService: DbserviceService
+              ) { }
 
   usuario: any="";
-  password: string=""; 
+  password: any=""; 
 
   ngOnInit() {
   }
@@ -34,6 +35,7 @@ export class LoginPage implements OnInit {
 
 
   async login() {
+    
     const usuario = await this.dbService.validarUsuario(this.usuario, this.password);
     if (usuario) {
       // Usuario válido, realizar acciones de inicio de sesión
@@ -49,7 +51,9 @@ export class LoginPage implements OnInit {
       // Usuario inválido, mostrar mensaje de error
       this.presentAlert('No existe el usuario en la base de datos');
     }
+       
   }
+   
    
   
   crear_cuenta()
